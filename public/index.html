@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html th:lang="_LANG_">
+<!-- <html lang="_LANG_"> -->
+<!-- <html lang="id"> -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#6495ed">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <script>
+      __DEV__ = '%NODE_ENV%' === 'development'
+      window.SHIPPING_ADDRESS = 'ASDF ASDFADSF'
+      window.FIRST_NAME = '_FIRST_NAME_'
+      window.LAST_NAME = '_LAST_NAME_'
+      window.CALLBACK_URL = '_CALLBACK_URL_'
+      window.CTRX_ID = '_CTRX_ID_'
+      window.STRX_ID = '_STRX_ID_'
+      window.PAR1 = '_PAR1_'
+      window.PAR2 = '_PAR2_'
+      window.PAR3 = '_PAR3_'
+      window.PAR4 = '_PAR4_'
+      window.PAR5 = '_PAR5_'
+      window.PAR6 = '_PAR6_'
+      window.PAR7 = '_PAR7_'
+      window.PAR8 = '_PAR8_'
+      window.PAR9 = '_PAR9_'
+      window.PAR10 = '_PAR10_'
+      window.PAR11 = '_PAR11_'
+      window.PAR12 = '_PAR12_'
+      window.MERCHANT_NAME = '_MERCHANT_NAME_'
+      window.PRODUCT_CODE = '_PRODUCT_CODE_'
+      window.PERIOD = '_PERIOD_'
+      window.LANG = document.documentElement.lang
+      // window.SHIPPING_ADDRESS = _SHIPPING_ADDRESS_
+      console.log('====>>>%NODE_ENV%', __DEV__)
+    </script>
+    <style>
+      #segment1{
+        /* background-color: blue; */
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 15px 15px 0px 0px;
+        /* border-color: black; */
+      }
+     #segment2{
+       padding: 0px;
+       background-color: transparent;
+       margin-bottom: 100px;
+       border: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+     }
+      #inputkartupanel{
+        background-color: white;
+        /* border: solid black 1px; */
+        margin-bottom: 20px !important;
+      }
+      #transactiondetailpanel{
+        background-color: white;
+        /* border: solid black 1px; */
+        margin-bottom: 20px !important;
+      }
+      #transactiondetailpanel .list .item{
+        border-bottom: 1px solid #5899d3;
+      }
+      #transactiondetailpanel .list .item .header{
+        color: #7b7c7c;
+        margin-bottom: 5px;
+      }
+      #transactiondetailpanel .list .item .content{
+        margin-bottom: 5px;
+      }
+      #headerdetailtransaction{
+        color: #2d5697;
+      }
+      #footertitle{
+        color: white;
+      }
+    </style>
+    <title>Rayapay Secure Payment</title>
+  </head>
+  <body style="background-color:cornflowerblue">
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    </body>
+</html>
