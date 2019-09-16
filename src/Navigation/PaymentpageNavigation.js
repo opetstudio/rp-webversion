@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
+import AppConfig from '../Config/AppConfig'
 // import { HashRouter as Router, Route, withRouter } from 'react-router-dom'
 
 // Import Screens for the Router
@@ -38,7 +39,7 @@ class NavigationRouter extends Component {
   }
   render () {
     // let basePath = '/PaymentPageCc' // for jboss
-    let basePath = '/paymentpage' // for jboss
+    let basePath = AppConfig.basePath // for jboss
     // let basePath = '' // for docker
     return (
       <Router>

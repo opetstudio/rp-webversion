@@ -51,7 +51,7 @@ class QrcodePageComponent extends Component {
     let payload = {
       userid: this.props.userid
     }
-    this.props.qrcodeRequest({message: 'requesting...', payload, url: '/paymentpage/qrcode/getQrCodeImage', method: 'post'})
+    this.props.qrcodeRequest({message: 'requesting...', payload})
   }
   _downloadQr (imageQr) {
 

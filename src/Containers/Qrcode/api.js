@@ -7,8 +7,8 @@ import HMACSHA256 from 'crypto-js/hmac-sha256'
 export const create = (api) => ({
   getQrCodeImage: (data, opt) => {
     // api.setHeader(AppConfig.authHeader, opt.session.token_type + ' ' + opt.session.access_token)
-    let url = opt.url || '/paymentpage/qrcode/getQrCodeImage'
-    let method = opt.method || 'get'
+    let url = AppConfig.basePath + '/qrcode/getQrCodeImage'
+    let method = 'post'
     let key = 'xxxx'
     let msg = JSON.stringify(data)
     // var key = CryptoJS.enc.Hex.parse('0123456789abcdef');

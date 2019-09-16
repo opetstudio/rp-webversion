@@ -1,6 +1,6 @@
 import React from 'react'
 import namor from 'namor'
-import Chance from 'chance'
+// import Chance from 'chance'
 
 const range = len => {
   const arr = []
@@ -11,9 +11,9 @@ const range = len => {
 }
 
 const newPerson = () => {
-  const statusChance = Math.random()
-  const chance = new Chance()
-  const _id = chance.guid()
+  // const statusChance = Math.random()
+  // const chance = new Chance()
+  const _id = Date().now()
   return {
     _id,
     firstName: namor.generate({ words: 1, numbers: 0 }),
@@ -21,12 +21,12 @@ const newPerson = () => {
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
-    status:
-      statusChance > 0.66
-        ? 'relationship'
-        : statusChance > 0.33
-          ? 'complicated'
-          : 'single'
+    // status:
+    //   statusChance > 0.66
+    //     ? 'relationship'
+    //     : statusChance > 0.33
+    //       ? 'complicated'
+    //       : 'single'
   }
 }
 

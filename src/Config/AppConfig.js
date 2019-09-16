@@ -11,6 +11,8 @@ export default {
   //   host: cred.AUTH0_HOST
   // },
   backendURL: '',
+  // basePath: '',
+  basePath: '/paymentpage',
   env,
   minDesktopScreenWidth: 769,
   authHeader: env === 'development' ? 'Authorization' : 'Auth'
