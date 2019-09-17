@@ -19,6 +19,9 @@
   "label.waktu_transaksi": "Waktu",
   "header.detail_pembayaran": "Detail Pembayaran",
   "label.userid": "User ID",
+  "label.transactionid": "Transaction ID",
   "label.generate": "Generate QR",
+  "label.submit_transaction": "Submit Transaction",
+  "label.pin": "Pin",
   "label.download": "Download"
 }
