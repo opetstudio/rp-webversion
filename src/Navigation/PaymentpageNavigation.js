@@ -12,6 +12,7 @@ import PaymentpageHome from '../Containers/Paymentpage/HomeContainer'
 import PaymentpageCallback from '../Containers/Paymentpage/CallbackContainer'
 import QrcodePage from '../Containers/Qrcode/QrcodePageContainer'
 import LoginPageContainer from '../Containers/Login/LoginPageContainer'
+import QrscannerPage from '../Containers/Qrscanner/QrscannerPage'
 
 class App extends Component {
   componentWillMount () {
@@ -48,7 +49,7 @@ class NavigationRouter extends Component {
             <Route exact path={`${basePath}/creditcard/paymentPage`} component={PaymentpageHome} />
             <Route exact path={`${basePath}/creditcard/callback`} component={PaymentpageCallback} />
             <Route exact path={`${basePath}/qrcodepage/form-generate`} component={QrcodePage} />
-            <Route exact path={`${basePath}/qrscanner`} component={QrcodePage} />
+            <Route exact path={`${basePath}/qrscanner`} component={QrscannerPage} />
             <Route exact path={`${basePath}/login`} component={LoginPageContainer} />
           </ResponsiveContainer>
         </AppContainer>
