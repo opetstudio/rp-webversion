@@ -18,7 +18,7 @@ export function * paymentpageRequest (api, action) {
   const { data } = action
   // make the call to the api
   const response = yield call(api.paymentpageRequest, data.payload, {url: data.url, method: data.method})
-  // console.log('response=====>', response)
+  console.log('response=====>', response)
   // JSON.stringify(response)
   // yield put(PaymentpageActions.paymentpageRequestPatch({log: ['hit api request url=> ' + JSON.stringify(response.config.url)]}))
   let message = ''
@@ -60,6 +60,12 @@ export function * paymentpageRequest (api, action) {
     // "message": "SUCCESS"
       yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message}))
     }
+    if (data.url === '/generate-transaction') {
+    //   "insertStatus": "00",
+    // "message": "SUCCESS"
+      let dataqrjsonstring = path(['dataqrjsonstring'], response.data)
+      yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, dataqrjsonstring}))
+    }
     // if (
     //   data.url === '/InitMDOApiV2/rest/validate'
     //   // data.url === '/CardVerifyGenerateOtpApi/rest/cardverifyRs' ||
@@ -95,6 +101,9 @@ export function * paymentpageRequest (api, action) {
     // // if (path(['originalError', 'response', 'status'], response) === 500) return yield put(LoginActions.loginRemoveSuccess({}))
     // yield put(PaymentpageActions.debitonlineRequestRemovecardFailed({ formSubmitMessage: validationMessages }))
     message = response.problem
+    if (data.url === '/generate-transaction') {
+      alert('generate-transaction gagal. service belum siap.')
+    }
   }
   yield put(PaymentpageActions.paymentpageRequestPatch({message, isRequesting: false}))
   // const sc = yield select(scene)

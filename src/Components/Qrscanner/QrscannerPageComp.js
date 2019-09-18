@@ -14,12 +14,22 @@ import {
   Select,
   Table,
   List,
-  Card
+  Card,
+  Dropdown
 } from 'semantic-ui-react'
 import { FormattedMessage } from 'react-intl'
 import QrReader from 'react-qr-reader'
+import { Redirect } from 'react-router-dom'
+import AppConfig from '../../Config/AppConfig'
+const basePath = AppConfig.basePath
+
+const optionsSof = [
+  {key: '01', text: 'RayaPay', value: '01'},
+  {key: '02', text: 'Rekening Bank Mandiri', value: '02'},
+  {key: '03', text: 'Rekening BRI', value: '03'}
+]
 export default class QrscannerPageComp extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       result: null
@@ -30,15 +40,69 @@ export default class QrscannerPageComp extends Component {
   }
   handleScan = data => {
     if (data) {
-      this.setState({
-        result: data
-      })
+    //   this.setState({
+    //     result: data
+    //   })
+      this.props.paymentpageRequestPatch({dataqr: data})
+      this.props.paymentpageRequest({message: 'requesting', payload: {sof: this.props.sof, dataqr: this.props.dataqr}, url: '/generate-transaction', method: 'post'})
     }
   }
   handleError = err => {
     console.error(err)
   }
+  handleChange (o, v) {
+    console.log('o===>', o)
+    console.log('v===>', v)
+    if (v.type === 'checkbox') {
+      return this.props.paymentpageRequestPatch({[v.name]: v.checked})
+    }
+    // if (v.name === 'cardNumber') {
+    //   //  trim
+    //   let cardNo = v.value
+    //   if (cardNo.length === 16) {
+    //     // hit luhn
+    //     this.props.paymentpageRequest({message: 'requesting', payload: {cardNo}, url: '/card-checking/luhn-validate', method: 'post'})
+    //   }
+    // }
+    this.props.paymentpageRequestPatch({[v.name]: v.value})
+    // this.setState({firstName: v.value})
+  }
+  _scannerRender () {
+    return (
+      <Segment>
+        <Grid celled='internally' columns='equal' stackable>
+          <Grid.Row>
+            <Grid.Column>
+              <Form loading={this.props.isRequesting}>
+                <Form.Field>
+                  {/* <label style={{visibility: 'hidden'}}>.</label> */}
+                  {/* <Input fluid placeholder='Middle name' /> */}
+                  <label>Sumber Dana</label>
+                  {/* <Select name='sof' fluid placeholder='sof' options={optionsSof} onChange={this.handleChange} /> */}
+                  <Dropdown
+                    options={optionsSof}
+                    defaultValue={optionsSof[0].value}
+                    onChange={(o, v) => this.handleChange({}, {type: 'dropdown', name: 'sof', value: v.value})}
+                  />
+                </Form.Field>
+                <br />
+                <br />
+                <QrReader
+                  delay={300}
+                  onError={this.handleError}
+                  onScan={this.handleScan}
+                  style={{ width: '100%' }}
+                />
+              </Form>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment>
+    )
+  }
   render () {
+    console.log('render => ', this.props)
+    if (this.props.dataqrjsonstring !== null && this.props.dataqrjsonstring !== '') return window.open(`${basePath}/qrPaymentPage`, '_self', true)
     return (
       <div>
         <Container>
@@ -48,44 +112,8 @@ export default class QrscannerPageComp extends Component {
               active
               onClick={() => {}}
             />
-            {/* <Menu.Item
-                    name='messages'
-                    active={activeItem === 'messages'}
-                    onClick={this.handleItemClick}
-                    /> */}
           </Menu>
-          <Segment>
-            <Grid celled='internally' columns='equal' stackable>
-              <Grid.Row>
-                <Grid.Column>
-                  <Form loading={this.props.isRequesting}>
-                    <Form.Group widths='equal'>
-                      <Form.Field>
-                        <label>{(<FormattedMessage id='label.transactionid' />)}</label>
-                        <Input type='text' name='transactionid' fluid placeholder={this.props.intl.formatMessage({ id: 'label.transactionid' })} icon={<Icon name='lock' />} onChange={this.handleChange} />
-                      </Form.Field>
-                    </Form.Group>
-                    {this.state.result && (<Form.Group widths='equal'>
-                      <Form.Field>
-                        <label>{(<FormattedMessage id='label.pin' />)}</label>
-                        <Input type='text' name='pin' fluid placeholder={this.props.intl.formatMessage({ id: 'label.pin' })} icon={<Icon name='lock' />} onChange={this.handleChange} />
-                      </Form.Field>
-                    </Form.Group>)}
-                    <Button primary onClick={this.handleSubmit} disabled={(this.props.isRequesting)}>{(<FormattedMessage id='label.submit_transaction' />)}</Button>
-                  </Form>
-                  {/* <p>{this.state.result}</p> */}
-                </Grid.Column>
-                <Grid.Column>
-                  {this.state.result === null && (<QrReader
-                    delay={300}
-                    onError={this.handleError}
-                    onScan={this.handleScan}
-                    style={{ width: '100%' }}
-                  />)}
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Segment>
+          {this._scannerRender()}
         </Container>
       </div>
     )

@@ -47,7 +47,8 @@ const host = baseUrl + ''
 // const baseUrl = 'http://localhost:8099/'
 // const host = 'http://localhost:8090/api/'
 const api = DebugConfig.useFixtures ? FixtureAPI : API.create(host)
-const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'https://secure.plink.co.id/' : '/')
+// const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'https://secure.plink.co.id/' : '/')
+const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/paymentpage/' : 'http://188.166.198.144:8762/paymentpage/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
 const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8282/' : 'https://api.erevnaraya.com/')

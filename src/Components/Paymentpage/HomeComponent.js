@@ -124,6 +124,7 @@ class Home extends Component {
     return 'Rp'
   }
   render () {
+    console.log('render')
     // let currency = this._currencyDisplay(this.props.par3)
     // const messages = defineMessages({
     //   item: {

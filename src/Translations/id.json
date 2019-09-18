@@ -22,6 +22,6 @@
   "label.transactionid": "Transaction ID",
   "label.generate": "Generate QR",
   "label.submit_transaction": "Submit Transaction",
-  "label.pin": "Pin",
+  "label.pin": "Masukan Pin",
   "label.download": "Download"
 }

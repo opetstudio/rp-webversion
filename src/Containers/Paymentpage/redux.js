@@ -71,7 +71,10 @@ export const INITIAL_STATE = Immutable({
   merchantName: initialData.MERCHANT_NAME,
   productCode: initialData.PRODUCT_CODE,
   period: initialData.PERIOD,
-  isLuhnOk: false
+  isLuhnOk: false,
+  sof: '',
+  dataqr: '',
+  dataqrjsonstring: null
 })
 
 /* ------------- Selectors ------------- */
@@ -107,7 +110,10 @@ export const PaymentpageSelectors = {
   merchantName: st => st.merchantName,
   productCode: st => st.productCode,
   period: st => st.period,
-  shippingAddress: st => st.shippingAddress
+  shippingAddress: st => st.shippingAddress,
+  sof: st => st.sof,
+  dataqr: st => st.dataqr,
+  dataqrjsonstring: st => st.dataqrjsonstring
 }
 
 /* ------------- Reducers ------------- */
@@ -134,6 +140,9 @@ export const paymentpageRequest = (state, { data }) => {
   if (data.hasOwnProperty('isShippingAddress')) mergeData.isShippingAddress = data.isShippingAddress
   if (data.hasOwnProperty('isLuhnOk')) mergeData.isLuhnOk = data.isLuhnOk
   if (data.hasOwnProperty('isRequesting')) mergeData.isRequesting = data.isRequesting
+  if (data.hasOwnProperty('sof')) mergeData.sof = data.sof
+  if (data.hasOwnProperty('dataqr')) mergeData.dataqr = data.dataqr
+  if (data.hasOwnProperty('dataqrjsonstring')) mergeData.dataqrjsonstring = data.dataqrjsonstring
   mergeData.version = state.version + 1
   return state.merge(mergeData)
 }
