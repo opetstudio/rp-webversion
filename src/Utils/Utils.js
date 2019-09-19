@@ -4,6 +4,7 @@ import AppConfig from '../Config/AppConfig'
 // import Chance from 'chance'
 
 var AES = require('crypto-js/aes')
+var hmacSha256 = require('crypto-js/hmac-sha256')
 var sha256 = require('crypto-js/sha256')
 var EncUtf8 = require('crypto-js/enc-utf8')
 
@@ -119,4 +120,7 @@ export const isLoggedIn = (isLoggedInState) => {
   else isLoggedInState = false
   // console.log('isLoggedIn isLoggedInState2===>', isLoggedInState)
   return isLoggedInState
+}
+export const generateHmac = (msg) => {
+  return hmacSha256(msg, 'prismalink2019').toString()
 }
