@@ -8,12 +8,9 @@ export default () => {
   /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
     app: require('./AppRedux').reducer,
-    // begin Ignite-Entity-Paymentpage
+    login: require('../Containers/Login/redux').reducer,
     paymentpage: require('../Containers/Paymentpage/redux').reducer,
-    // end Ignite-Entity-Paymentpage
-    // begin Ignite-Entity-Paymentpage
     qrcode: require('../Containers/Qrcode/redux').reducer
-    // end Ignite-Entity-Paymentpage
   })
   let finalReducers = rootReducer
 

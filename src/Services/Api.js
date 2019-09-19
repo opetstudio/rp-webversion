@@ -81,7 +81,7 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
 
   let apiMerged = {}
   // merge api
-  // paymentpage
+  apiMerged = merge(apiMerged, require('../Containers/Login/api').create(api))
   apiMerged = merge(apiMerged, require('../Containers/Paymentpage/api').create(api))
   apiMerged = merge(apiMerged, require('../Containers/Qrcode/api').create(api))
   apiMerged = merge(apiMerged, {})

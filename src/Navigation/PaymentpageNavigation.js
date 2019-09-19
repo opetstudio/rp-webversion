@@ -14,15 +14,15 @@ import QrcodePage from '../Containers/Qrcode/QrcodePageContainer'
 import LoginPageContainer from '../Containers/Login/LoginPageContainer'
 import QrscannerPage from '../Containers/Qrscanner/QrscannerPage'
 
+const basePath = AppConfig.basePath
 class App extends Component {
   componentWillMount () {
     this.unlisten = this.props.history.listen((location, action) => {
       // this.props.onRouteChange(location)
-      const loginRestriction = [
-        '/login'
-      ]
+      console.log('props.history.listen ', window.location.pathname)
+      const loginRestriction = [basePath + '/home', basePath + '/', basePath + '/merchant/create', basePath + '/qrscanner']
       if (loginRestriction.indexOf(location.pathname) !== -1) {
-        this.props.checkLogedStatus()
+        this.props.checkLogedStatus({})
       }
     })
   }
@@ -39,9 +39,6 @@ class NavigationRouter extends Component {
   componentWillUpdate (prevProps) {
   }
   render () {
-    // let basePath = '/PaymentPageCc' // for jboss
-    let basePath = AppConfig.basePath // for jboss
-    // let basePath = '' // for docker
     return (
       <Router>
         <AppContainer checkLogedStatus={this.props.checkLogedStatus}>

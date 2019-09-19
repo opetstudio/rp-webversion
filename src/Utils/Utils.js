@@ -1,6 +1,18 @@
 import React from 'react'
 import namor from 'namor'
+import AppConfig from '../Config/AppConfig'
 // import Chance from 'chance'
+
+var AES = require('crypto-js/aes')
+var sha256 = require('crypto-js/sha256')
+var EncUtf8 = require('crypto-js/enc-utf8')
+
+const userPriv = {
+  '100': 'Customer',
+  '200': 'Merchant Admin',
+  '300': 'Partner Admin',
+  '400': 'Operator'
+}
 
 const range = len => {
   const arr = []
@@ -65,3 +77,46 @@ export const Tips = () => (
     <em>Tip: Hold shift when sorting to multi-sort!</em>
   </div>
 )
+export const getAccessToken = () => {
+  console.log('getAccessToken')
+  const publicToken = window.sessionStorage.getItem(AppConfig.publicToken)
+  const sessionToken = window.sessionStorage.getItem(AppConfig.sessionToken)
+  const ok = true
+  // dont encrypt
+  if (ok) return sessionToken
+
+  if (!publicToken || !sessionToken) return ''
+  const ciphertext = AES.encrypt(publicToken, sessionToken)
+  // const plaintext = ciphertext.toString(EncUtf8)
+  // const plaintext = ciphertext.toString(EncUtf8)
+  // const test = aesjs.utils.utf8.toBytes('asdfadsfd')
+  // const test = sha256(publicToken)
+  // console.log('getAccessToken test=', test)
+  // console.log('getAccessToken sha256=', test)
+  // console.log('getAccessToken plaintext=', plaintext)
+  // console.log('getAccessToken ciphertext=', ciphertext)
+  // console.log('getAccessToken publicToken=', publicToken)
+  // console.log('getAccessToken sessionToken=', sessionToken)
+  return ciphertext
+  // return AES.decrypt(ciphertext.toString(), sessionToken)
+}
+export const decryptAt = (msg, key) => {
+  console.log('decryptAt')
+  const publicToken = window.sessionStorage.getItem(AppConfig.publicToken)
+  const sessionToken = window.sessionStorage.getItem(AppConfig.sessionToken)
+  if (!publicToken || !sessionToken) return ''
+  const str = AES.decrypt(msg, sessionToken)
+  var plaintext = str.toString(EncUtf8)
+  return plaintext
+}
+export const getUserPrivName = (uPriv) => {
+  return userPriv[uPriv]
+}
+export const isLoggedIn = (isLoggedInState) => {
+  // console.log('isLoggedIn isLoggedInState1===>', isLoggedInState)
+  isLoggedInState = isLoggedInState || window.localStorage.getItem('isLoggedIn') || false
+  if (isLoggedInState === 'true' || isLoggedInState === true) isLoggedInState = true
+  else isLoggedInState = false
+  // console.log('isLoggedIn isLoggedInState2===>', isLoggedInState)
+  return isLoggedInState
+}

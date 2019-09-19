@@ -1,29 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { injectIntl } from 'react-intl'
-
+import LoginActions, { LoginSelectors } from './redux'
+import {isLoggedIn} from '../../Utils/Utils'
 import LoginPageComponent from '../../Components/Login/LoginPageComponent'
-import FooterContainer from '../Footer/FooterContainer'
+import { injectIntl } from 'react-intl'
+import AppConfig from '../../Config/AppConfig'
+const basePath = AppConfig.basePath
 
-const TheComponent = props => (
-  <LoginPageComponent
-    history={props.history}
-    footer={(<FooterContainer />)}
-    {...props}
-  />
-)
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    // isRequesting: QrcodeSelectors.isRequesting(state.qrcode),
-    // qrimage: QrcodeSelectors.getQrimage(state.qrcode),
-    // userid: QrcodeSelectors.getUserid(state.qrcode)
+class TheComponent extends React.PureComponent {
+  render () {
+    if (isLoggedIn(this.props.isLoggedIn) !== true) return (<LoginPageComponent {...this.props} />)
+    // if (isLoggedIn(this.props.isLoggedIn) !== true) return null
+    // else return null
+    else return window.open(`${basePath}/qrscanner`, '_self', true)
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const isLoggedIn = LoginSelectors.isLoggedIn(state.login)
+  console.log('mapStateToProps isLoggedIn=', isLoggedIn)
+  return {
+    isLoggedIn: LoginSelectors.isLoggedIn(state.login),
+    formSubmitMessage: LoginSelectors.getFormSubmitMessage(state.login),
+    responseMessage: LoginSelectors.responseMessage(state.login),
+    responseDescription: LoginSelectors.responseDescription(state.login),
+    responseCode: LoginSelectors.responseCode(state.login)
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    // qrcodeRequestPatch: query => dispatch(QrcodeActions.qrcodeRequestPatch(query)),
-    // qrcodeRequest: query => dispatch(QrcodeActions.qrcodeRequest(query))
+    loginDoLogin: data => dispatch(LoginActions.loginDoLogin(data)),
+    loginPatch: data => dispatch(LoginActions.loginPatch(data))
   }
 }
 export default connect(

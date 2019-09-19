@@ -8,25 +8,15 @@ import DebugConfig from '../Config/DebugConfig'
 import AppConfig from '../Config/AppConfig'
 
 // Types /* ------------- Types ------------- */
-
-// begin Ignite-Entity-Paymentpage
+import { LoginTypes } from '../Containers/Login/redux'
 import { PaymentpageTypes } from '../Containers/Paymentpage/redux'
-// end Ignite-Entity-Paymentpage
-// begin Ignite-Entity-Qrcode
 import { QrcodeTypes } from '../Containers/Qrcode/redux'
-// end Ignite-Entity-Qrcode
-
 import { StartupTypes } from '../Redux/StartupRedux'
 // Sagas /* ------------- Sagas ------------- */
-// begin Ignite-Entity-Paymentpage
 import { paymentpageRequest } from '../Containers/Paymentpage/sagas'
-// end Ignite-Entity-Paymentpage
-// begin Ignite-Entity-Qrcode
 import { qrcodeRequest } from '../Containers/Qrcode/sagas'
-// end Ignite-Entity-Qrcode
-
-
 import { startup } from './StartupSagas'
+import { loginDoLogin, loginCheckStatus, removeLogin } from '../Containers/Login/sagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -48,6 +38,10 @@ const host = baseUrl + ''
 // const host = 'http://localhost:8090/api/'
 const api = DebugConfig.useFixtures ? FixtureAPI : API.create(host)
 // const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'https://secure.plink.co.id/' : '/')
+
+// java:mbdd-mserchant|docker:prismalink/dashboard-api:1|k8s:prismalink-dashboard-api
+const dashboardApi = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/dashboard-api/' : 'http://188.166.198.144:8762/dashboard-api/')
+
 const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/paymentpage/' : 'http://188.166.198.144:8762/paymentpage/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
@@ -59,12 +53,11 @@ const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost
 
 export default function * root () {
   yield all([
-    // begin Ignite-Entity-Paymentpage
+    takeLatest(LoginTypes.LOGIN_REMOVE, removeLogin, dashboardApi),
+    takeLatest(LoginTypes.LOGIN_DO_LOGIN, loginDoLogin, dashboardApi),
+    takeLatest(LoginTypes.LOGIN_CHECK_STATUS, loginCheckStatus, dashboardApi),
     takeLatest(PaymentpageTypes.PAYMENTPAGE_REQUEST, paymentpageRequest, apiPaymentpage),
-    // end Ignite-Entity-Paymentpage
-    // begin Ignite-Entity-Qrcode
     takeLatest(QrcodeTypes.QRCODE_REQUEST, qrcodeRequest, apiQrcode),
-    // end Ignite-Entity-Qrcode
     takeLatest(StartupTypes.STARTUP, startup, api)
     // some sagas receive extra parameters in addition to an action
     // takeLatest(UserTypes.USER_REQUEST, getUserAvatar, api)
