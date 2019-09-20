@@ -76,6 +76,13 @@ export function * paymentpageRequest (api, action) {
       if (urlVerifyTransaction !== null && urlVerifyTransaction !== '') window.open(urlVerifyTransaction, '_self')
       yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, dataqrjsonstring, urlVerifyTransaction}))
     }
+    if (data.url === '/do-payment') {
+    //   "insertStatus": "00",
+    // "message": "SUCCESS"
+      let urlStatusTransaction = path(['urlStatusTransaction'], response.data) || ''
+      if (urlStatusTransaction !== null && urlStatusTransaction !== '') window.open(urlStatusTransaction, '_self')
+      yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, urlStatusTransaction}))
+    }
     // if (
     //   data.url === '/InitMDOApiV2/rest/validate'
     //   // data.url === '/CardVerifyGenerateOtpApi/rest/cardverifyRs' ||

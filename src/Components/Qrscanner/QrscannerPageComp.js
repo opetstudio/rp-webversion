@@ -18,7 +18,7 @@ import {
   Dropdown
 } from 'semantic-ui-react'
 import { FormattedMessage } from 'react-intl'
-import QrReader from 'react-qr-reader'
+import QrReader from 'react-qr-scanner'
 import { Redirect } from 'react-router-dom'
 import { merge } from 'ramda'
 import AppConfig from '../../Config/AppConfig'
@@ -54,6 +54,7 @@ export default class QrscannerPageComp extends Component {
   }
   handleError = err => {
     console.error(err)
+    alert(err.message)
   }
   handleChange (o, v) {
     console.log('o===>', o)
@@ -97,6 +98,7 @@ export default class QrscannerPageComp extends Component {
                   onError={this.handleError}
                   onScan={this.handleScan}
                   style={{ width: '100%' }}
+                  // facingMode={'rear'}
                 />
               </Form>
             </Grid.Column>

@@ -19,8 +19,11 @@ import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
 import {Images} from '../../Themes'
 import {Helmet} from 'react-helmet'
+import AppConfig from '../../Config/AppConfig'
 // import FormCc from './FormCc'
 import QrcodeInputPinForm from './QrcodeInputPinForm'
+
+const basePath = AppConfig.basePath
 
 const visaIcon = Images.visaicon
 const jcbicon = Images.jcbicon
@@ -54,7 +57,7 @@ const optionsMonth = [
   {key: '12', text: 'December', value: '12'}
 ]
 
-class Home extends Component {
+class StatusTrxPageComp extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -235,13 +238,10 @@ class Home extends Component {
                 </Table> */}
                 </Grid.Column>
                 <Grid.Column id={'inputkartupanel'}>
-                  {/* <Header as='h3'>
-                  <span>Pay with Credit Card</span>
-                </Header> */}
-                  {(this.props.message !== '00' && this.props.message !== '') &&
-                    <Message error content={this.props.message} />
-                  }
-                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit} />
+                  <div><p>Transaksi berhasil</p></div>
+                  <br />
+                  <br />
+                  <Button primary onClick={() => window.open(basePath + '/qrscanner', '_self')}>Kembali ke halman Scan QR</Button>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -254,4 +254,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default StatusTrxPageComp

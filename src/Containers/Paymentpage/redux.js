@@ -76,6 +76,7 @@ export const INITIAL_STATE = Immutable({
   dataqr: '',
   dataqrjsonstring: null,
   urlVerifyTransaction: null,
+  urlStatusTransaction: null,
   responseStatus: '',
   responseMessage: '',
   responseDescription: ''
@@ -119,6 +120,7 @@ export const PaymentpageSelectors = {
   dataqr: st => st.dataqr,
   dataqrjsonstring: st => st.dataqrjsonstring,
   urlVerifyTransaction: st => st.urlVerifyTransaction,
+  urlStatusTransaction: st => st.urlStatusTransaction,
   responseStatus: st => st.responseStatus,
   responseMessage: st => st.responseMessage,
   responseDescription: st => st.responseDescription
@@ -152,6 +154,7 @@ export const paymentpageRequest = (state, { data }) => {
   if (data.hasOwnProperty('dataqr')) mergeData.dataqr = data.dataqr
   if (data.hasOwnProperty('dataqrjsonstring')) mergeData.dataqrjsonstring = data.dataqrjsonstring
   if (data.hasOwnProperty('urlVerifyTransaction')) mergeData.urlVerifyTransaction = data.urlVerifyTransaction
+  if (data.hasOwnProperty('urlStatusTransaction')) mergeData.urlStatusTransaction = data.urlStatusTransaction
   if (data.hasOwnProperty('responseStatus')) mergeData.responseStatus = data.responseStatus
   if (data.hasOwnProperty('responseMessage')) mergeData.responseMessage = data.responseMessage
   if (data.hasOwnProperty('responseDescription')) mergeData.responseDescription = data.responseDescription

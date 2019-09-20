@@ -9,6 +9,7 @@ import ResponsiveContainer from '../Containers/Paymentpage/ResponsiveContainer'
 // --- import list page entyty ---
 
 import PaymentpageHome from '../Containers/Paymentpage/HomeContainer'
+import StatusTrxPage from '../Containers/Paymentpage/StatusTrxPage'
 import PaymentpageCallback from '../Containers/Paymentpage/CallbackContainer'
 import QrcodePage from '../Containers/Qrcode/QrcodePageContainer'
 import LoginPageContainer from '../Containers/Login/LoginPageContainer'
@@ -46,6 +47,7 @@ class NavigationRouter extends Component {
             <Route exact path={`${basePath}/creditcard/paymentPage`} component={PaymentpageHome} />
             {/* <Route exact path={`${basePath}/qrPaymentPage`} component={PaymentpageHome} /> */}
             <Route exact path={`${basePath}/verify-transaction/:trxpkg`} component={PaymentpageHome} />
+            <Route exact path={`${basePath}/status-transaction/:trxpkg`} component={StatusTrxPage} />
             <Route exact path={`${basePath}/creditcard/callback`} component={PaymentpageCallback} />
             <Route exact path={`${basePath}/qrcodepage/form-generate`} component={QrcodePage} />
             <Route exact path={`${basePath}/qrscanner`} component={QrscannerPage} />
