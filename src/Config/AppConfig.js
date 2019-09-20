@@ -15,5 +15,7 @@ export default {
   basePath: '/paymentpage',
   env,
   minDesktopScreenWidth: 769,
-  authHeader: env === 'development' ? 'Authorization' : 'Auth'
+  authHeader: env === 'development' ? 'Authorization' : 'Auth',
+  publicToken: 'publicToken',
+  sessionToken: 'sessionToken'
 }

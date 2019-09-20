@@ -19,6 +19,8 @@ import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
 import {Images} from '../../Themes'
 import {Helmet} from 'react-helmet'
+// import FormCc from './FormCc'
+import QrcodeInputPinForm from './QrcodeInputPinForm'
 
 const visaIcon = Images.visaicon
 const jcbicon = Images.jcbicon
@@ -237,50 +239,9 @@ class Home extends Component {
                   <span>Pay with Credit Card</span>
                 </Header> */}
                   {(this.props.message !== '00' && this.props.message !== '') &&
-                <Message error content={this.props.message} />
+                    <Message error content={this.props.message} />
                   }
-                  {/* {(this.props.message === '00' && this.props.message !== '') &&
-                <Message success content={this.props.message} />
-              } */}
-                  <Form loading={this.props.isRequesting}>
-                    {/* <Form.Group>
-                  <Form.Input name='firstName' label='First name' placeholder='First Name' width={8} value={this.props.firstName} readOnly />
-                  <Form.Input name='lastName' label='Last Name' placeholder='Last Name' width={8} value={this.props.lastName} readOnly />
-                </Form.Group> */}
-                    <Form.Field>
-                      <label style={{position: 'relative'}}>
-                        {(<FormattedMessage id='label.no_kartu' />)}
-                        <div style={{position: 'absolute', right: 0, bottom: 0}}>
-                          <Image src={mastercardicon} style={{width: 35, marginLeft: 10, display: 'inline'}} />
-                          <Image src={visaIcon} style={{width: 30, marginLeft: 10, display: 'inline'}} />
-                          <Image src={jcbicon} style={{width: 25, marginLeft: 10, display: 'inline'}} />
-                        </div>
-                      </label>
-                      <Form.Input type='number' name='cardNumber' placeholder={this.props.intl.formatMessage({ id: 'label.no_kartu' })} onChange={this.handleChange} />
-                    </Form.Field>
-                    <Form.Group widths='equal'>
-                      <Form.Field disabled={!this.props.isLuhnOk}>
-                        <label>{(<FormattedMessage id='label.bulan_kadaluwarsa' />)}</label>
-                        {/* <Input fluid placeholder='First name' /> */}
-                        <Select name='expireMonth' fluid placeholder={this.props.intl.formatMessage({ id: 'label.bulan' })} options={optionsMonth} onChange={this.handleChange} />
-                      </Form.Field>
-                      <Form.Field disabled={!this.props.isLuhnOk}>
-                        {/* <label style={{visibility: 'hidden'}}>.</label> */}
-                        {/* <Input fluid placeholder='Middle name' /> */}
-                        <label>{(<FormattedMessage id='label.tahun_kadaluwarsa' />)}</label>
-                        <Select name='expireYear' fluid placeholder={this.props.intl.formatMessage({ id: 'label.tahun' })} options={optionsYear} onChange={this.handleChange} />
-                      </Form.Field>
-                      <Form.Field disabled={!this.props.isLuhnOk}>
-                        <label>{(<FormattedMessage id='label.cvv' />)}</label>
-                        <Input type='password' name='cvv' fluid placeholder={this.props.intl.formatMessage({ id: 'label.cvv' })} icon={<Icon name='lock' />} onChange={this.handleChange} />
-                      </Form.Field>
-                    </Form.Group>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <Button primary onClick={this.handleSubmit} disabled={(!this.props.isLuhnOk || this.props.isRequesting)}>{(<FormattedMessage id='label.bayar' />)}</Button>
-                  </Form>
+                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>

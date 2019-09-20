@@ -20,6 +20,7 @@ import {
 import { FormattedMessage } from 'react-intl'
 import QrReader from 'react-qr-reader'
 import { Redirect } from 'react-router-dom'
+import { merge } from 'ramda'
 import AppConfig from '../../Config/AppConfig'
 const basePath = AppConfig.basePath
 
@@ -43,8 +44,12 @@ export default class QrscannerPageComp extends Component {
     //   this.setState({
     //     result: data
     //   })
+      if (this.props.isRequesting) return
+
       this.props.paymentpageRequestPatch({dataqr: data})
-      this.props.paymentpageRequest({message: 'requesting', payload: {sof: this.props.sof, dataqr: this.props.dataqr}, url: '/generate-transaction', method: 'post'})
+      let dataGenerateTrx = JSON.parse('{"channelId": "Majesty0001", "serviceCode": "2002","currency": "IDR", "transactionNo": "01082017", "transactionAmount": "1000", "transactionDate":"09-08-2019 11:20:30", "description": "pembayaran hunian, no unit 125", "customerName": "risa paramita", "customerEmail": "endah.paramita@prismalink.co.id", "customerPhone": "08976357111", "key": "5CBE964F5BA21", "callbackURL": "https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en", "merchantName": "Majesty Apartment", "productCode": "125", "period": "August 2019", "lang": "en"}')
+      dataGenerateTrx = merge(dataGenerateTrx, {sof: this.props.sof, dataqr: this.props.dataqr})
+      this.props.paymentpageRequest({message: 'requesting', payload: dataGenerateTrx, url: '/generate-transaction', method: 'post'})
     }
   }
   handleError = err => {
@@ -111,6 +116,10 @@ export default class QrscannerPageComp extends Component {
               name='QrScanner'
               active
               onClick={() => {}}
+            />
+            <Menu.Item
+              name='Logout'
+              onClick={() => this.props.logout()}
             />
           </Menu>
           {this._scannerRender()}

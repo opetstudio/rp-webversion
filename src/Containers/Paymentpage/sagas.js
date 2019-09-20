@@ -4,6 +4,8 @@ import { getAttributes, getEntity, getEntityCollection, getEntityBatch } from '.
 import { merge, path } from 'ramda'
 import _ from 'lodash'
 import Cookies from 'universal-cookie'
+import AppConfig from '../../Config/AppConfig'
+const basePath = AppConfig.basePath
 // import { showSagaMessage } from '../Translations/SagaMessages'
 // import history from '../Services/BrowserHistory'
 
@@ -23,7 +25,13 @@ export function * paymentpageRequest (api, action) {
   // yield put(PaymentpageActions.paymentpageRequestPatch({log: ['hit api request url=> ' + JSON.stringify(response.config.url)]}))
   let message = ''
   // success?
+  let responseStatus = ''
+  let responseMessage = ''
+  let responseDescription = ''
   if (response.ok) {
+    responseStatus = path(['responseStatus'], response.data) || ''
+    responseMessage = path(['responseMessage'], response.data) || ''
+    responseDescription = path(['responseDescription'], response.data) || ''
     // const {byId, allIds, status} = getEntity(response.data)
     // if (response.status === 201) {
     //   const byId = {[response.data._id]: response.data}
@@ -64,7 +72,9 @@ export function * paymentpageRequest (api, action) {
     //   "insertStatus": "00",
     // "message": "SUCCESS"
       let dataqrjsonstring = path(['dataqrjsonstring'], response.data)
-      yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, dataqrjsonstring}))
+      let urlVerifyTransaction = path(['url'], response.data) || ''
+      if (urlVerifyTransaction !== null && urlVerifyTransaction !== '') window.open(urlVerifyTransaction, '_self')
+      yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, dataqrjsonstring, urlVerifyTransaction}))
     }
     // if (
     //   data.url === '/InitMDOApiV2/rest/validate'
@@ -96,6 +106,9 @@ export function * paymentpageRequest (api, action) {
     //   yield put(PaymentpageActions.paymentpageRequestPatch({otpVerifiedToken, cardToken, cardTokenId}))
     // }
   } else {
+    responseStatus = response.problem
+    responseMessage = response.problem
+    responseDescription = response.problem
     // let validationMessages = JSON.stringify(path(['originalError', 'response', 'data', 'validation_messages'], response))
     // if (response.status === 500) validationMessages = path(['originalError', 'response', 'data', 'detail'], response)
     // // if (path(['originalError', 'response', 'status'], response) === 500) return yield put(LoginActions.loginRemoveSuccess({}))
@@ -105,7 +118,7 @@ export function * paymentpageRequest (api, action) {
       alert('generate-transaction gagal. service belum siap.')
     }
   }
-  yield put(PaymentpageActions.paymentpageRequestPatch({message, isRequesting: false}))
+  yield put(PaymentpageActions.paymentpageRequestPatch({message, isRequesting: false, responseStatus, responseMessage, responseDescription}))
   // const sc = yield select(scene)
 
   // if (data.nextScene && message === '00') {

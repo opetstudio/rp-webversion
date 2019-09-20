@@ -44,7 +44,8 @@ class NavigationRouter extends Component {
         <AppContainer checkLogedStatus={this.props.checkLogedStatus}>
           <ResponsiveContainer>
             <Route exact path={`${basePath}/creditcard/paymentPage`} component={PaymentpageHome} />
-            <Route exact path={`${basePath}/qrPaymentPage`} component={PaymentpageHome} />
+            {/* <Route exact path={`${basePath}/qrPaymentPage`} component={PaymentpageHome} /> */}
+            <Route exact path={`${basePath}/verify-transaction/:trxpkg`} component={PaymentpageHome} />
             <Route exact path={`${basePath}/creditcard/callback`} component={PaymentpageCallback} />
             <Route exact path={`${basePath}/qrcodepage/form-generate`} component={QrcodePage} />
             <Route exact path={`${basePath}/qrscanner`} component={QrscannerPage} />

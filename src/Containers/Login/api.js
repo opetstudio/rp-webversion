@@ -24,10 +24,9 @@ export const create = api => ({
   },
   updateLogin: data => api.patch('/logins/' + data.id, { login: data }),
   removeLogin: (data, opt) => {
-    api.setHeader(
-      AppConfig.authHeader,
-      opt.session.token_type + ' ' + opt.session.access_token
-    )
+    console.log('removeLogin invoked')
+    api.setHeader('mac', '6905fad8847d8548e225e1701ada9f502741e0f6c3fd68697017e5c06b7ff733')
+    api.setHeader(AppConfig.authHeader, opt.session.token_type + ' ' + opt.session.access_token)
     return api.get('/plink/logout')
   },
   getLoginStatus: (data, opt) => {

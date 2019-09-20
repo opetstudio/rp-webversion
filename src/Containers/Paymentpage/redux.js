@@ -74,7 +74,11 @@ export const INITIAL_STATE = Immutable({
   isLuhnOk: false,
   sof: '',
   dataqr: '',
-  dataqrjsonstring: null
+  dataqrjsonstring: null,
+  urlVerifyTransaction: null,
+  responseStatus: '',
+  responseMessage: '',
+  responseDescription: ''
 })
 
 /* ------------- Selectors ------------- */
@@ -113,7 +117,11 @@ export const PaymentpageSelectors = {
   shippingAddress: st => st.shippingAddress,
   sof: st => st.sof,
   dataqr: st => st.dataqr,
-  dataqrjsonstring: st => st.dataqrjsonstring
+  dataqrjsonstring: st => st.dataqrjsonstring,
+  urlVerifyTransaction: st => st.urlVerifyTransaction,
+  responseStatus: st => st.responseStatus,
+  responseMessage: st => st.responseMessage,
+  responseDescription: st => st.responseDescription
 }
 
 /* ------------- Reducers ------------- */
@@ -143,6 +151,10 @@ export const paymentpageRequest = (state, { data }) => {
   if (data.hasOwnProperty('sof')) mergeData.sof = data.sof
   if (data.hasOwnProperty('dataqr')) mergeData.dataqr = data.dataqr
   if (data.hasOwnProperty('dataqrjsonstring')) mergeData.dataqrjsonstring = data.dataqrjsonstring
+  if (data.hasOwnProperty('urlVerifyTransaction')) mergeData.urlVerifyTransaction = data.urlVerifyTransaction
+  if (data.hasOwnProperty('responseStatus')) mergeData.responseStatus = data.responseStatus
+  if (data.hasOwnProperty('responseMessage')) mergeData.responseMessage = data.responseMessage
+  if (data.hasOwnProperty('responseDescription')) mergeData.responseDescription = data.responseDescription
   mergeData.version = state.version + 1
   return state.merge(mergeData)
 }
