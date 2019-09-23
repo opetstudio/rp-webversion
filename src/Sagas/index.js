@@ -41,10 +41,10 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create(host)
 
 // java:mbdd-mserchant|docker:prismalink/dashboard-api:1|k8s:prismalink-dashboard-api
 // const dashboardApi = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/dashboard-api/' : 'http://localhost:8762/dashboard-api/')
-const dashboardApi = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/dashboard-api/' : 'https://api.erevnaraya.com/dashboard-api/')
+const dashboardApi = API.create(AppConfig.env === 'development' ? 'https://api.erevnaraya.com/dashboard-api/' : 'https://api.erevnaraya.com/dashboard-api/')
 
 // const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/paymentpage/' : 'http://localhost:8762/paymentpage/')
-const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/paymentpage/' : 'https://api.erevnaraya.com/paymentpage/')
+const apiPaymentpage = API.create(AppConfig.env === 'development' ? 'https://api.erevnaraya.com/paymentpage/' : 'https://api.erevnaraya.com/paymentpage/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
 // const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8762/' : 'http://localhost:8762/')
 const apiQrcode = API.create(AppConfig.env === 'development' ? 'http://localhost:8282/' : 'https://api.erevnaraya.com/')

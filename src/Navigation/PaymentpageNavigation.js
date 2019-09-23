@@ -14,6 +14,7 @@ import PaymentpageCallback from '../Containers/Paymentpage/CallbackContainer'
 import QrcodePage from '../Containers/Qrcode/QrcodePageContainer'
 import LoginPageContainer from '../Containers/Login/LoginPageContainer'
 import QrscannerPage from '../Containers/Qrscanner/QrscannerPage'
+import SuccessPage from '../Components/Paymentpage/SuccesssComponent'
 
 const basePath = AppConfig.basePath
 class App extends Component {
@@ -46,6 +47,7 @@ class NavigationRouter extends Component {
           <ResponsiveContainer>
             <Route exact path={`${basePath}/creditcard/paymentPage`} component={PaymentpageHome} />
             {/* <Route exact path={`${basePath}/qrPaymentPage`} component={PaymentpageHome} /> */}
+            <Route exact path={`${basePath}/Success`} component={SuccessPage} />
             <Route exact path={`${basePath}/verify-transaction/:trxpkg`} component={PaymentpageHome} />
             <Route exact path={`${basePath}/status-transaction/:trxpkg`} component={StatusTrxPage} />
             <Route exact path={`${basePath}/creditcard/callback`} component={PaymentpageCallback} />

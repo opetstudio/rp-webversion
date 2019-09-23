@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Container } from 'semantic-ui-react'
 import {Images, Colors} from '../../Themes'
 
 const messageBox = (msg, success) => (
@@ -32,7 +32,8 @@ class LoginPageComponent extends Component {
   }
   render () {
     return (
-      <div style={{backgroundImage: 'url(' + Images.base_bg + ')', backgroundSize: '100% 100%',padding:'5%'}}>
+      <div>
+        <Container>
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
@@ -67,6 +68,8 @@ class LoginPageComponent extends Component {
             </Message>
           </Grid.Column>
         </Grid>
+        </Container>
+        {this.props.footer}
       </div>
     )
   }

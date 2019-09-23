@@ -17,7 +17,7 @@ import {
 } from 'semantic-ui-react'
 import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
-import {Images} from '../../Themes'
+import {Images,Colors} from '../../Themes'
 import {Helmet} from 'react-helmet'
 import AppConfig from '../../Config/AppConfig'
 // import FormCc from './FormCc'
@@ -30,7 +30,7 @@ const jcbicon = Images.jcbicon
 const mastercardicon = Images.mastercardicon
 const pcidss = Images.pcidss
 const sslsecurity = Images.sslsecurity
-const plinkpayment = Images.plinkpayment
+const rayapayLogo = Images.rayapay_logo
 
 // let minOffset = 0
 let maxOffset = 20
@@ -141,9 +141,12 @@ class StatusTrxPageComp extends Component {
       <div>
         {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
         <Container>
+        <div style={{backgroundColor:Colors.rp_gray2}}>
+          <p style={{textAlign:'center',fontSize: '100%', fontSize: '3.5vw',color:Colors.white}}>Transaction status</p>
+        </div>
           <Segment id={'segment1'}>
-            <Image src={plinkpayment} style={{height: 45, display: 'inline'}} />
-            <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} />
+            <Image src={rayapayLogo} style={{height: 45, display: 'inline'}} />
+            {/* <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} /> */}
             <Image src={sslsecurity} style={{height: 20, marginLeft: 20, display: 'inline'}} />
           </Segment>
           {/* <Segment style={{ marginTop: 10, marginBottom: 10 }} placeholder>
@@ -237,11 +240,17 @@ class StatusTrxPageComp extends Component {
                   </Table.Body>
                 </Table> */}
                 </Grid.Column>
-                <Grid.Column id={'inputkartupanel'}>
-                  <div><p>Transaksi berhasil</p></div>
+                <Grid.Column id={'inputkartupanel'} align='center'>
+                  <div style={{width:'20%',align:'center'}}>
+                    <svg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130.2 130.2'>
+                      <circle class='path circle' fill='none' stroke='#73AF55' stroke-width='6' stroke-miterlimit='10' cx='65.1' cy='65.1' r='62.1' />
+                      <polyline class='path check' fill='none' stroke='#73AF55' stroke-width='6' stroke-linecap='round' stroke-miterlimit='10' points='100.2,40.2 51.5,88.8 29.8,67.5 ' />
+                    </svg>
+                    <p class='success' style={{textAlign:'center',color:'#73AF55'}}>Transaction Success!</p>
+                  </div>
                   <br />
                   <br />
-                  <Button primary onClick={() => window.open(basePath + '/qrscanner', '_self')}>Kembali ke halman Scan QR</Button>
+                  <Button style={{backgroundColor:Colors.rp_gray2}} primary onClick={() => window.open(basePath + '/qrscanner', '_self')}>Kembali ke halman Scan QR</Button>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
