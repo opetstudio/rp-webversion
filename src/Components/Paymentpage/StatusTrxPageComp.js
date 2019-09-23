@@ -250,13 +250,17 @@ class StatusTrxPageComp extends Component {
                   </div>
                   <br />
                   <br />
-                  <Button style={{backgroundColor:Colors.rp_gray2}} primary onClick={() => window.open(basePath + '/qrscanner', '_self')}>Kembali ke halman Scan QR</Button>
+                  <Button style={{backgroundColor: Colors.rp_gray2}} primary onClick={() => window.open(basePath + '/qrscanner', '_self')}>Kembali ke halman Scan QR</Button>
                 </Grid.Column>
               </Grid.Row>
             </Grid>
           </Segment>
         </Container>
         {/* </Segment> */}
+        <br />
+        <br />
+        <br />
+        <br />
         {this.props.footer}
       </div>
     )

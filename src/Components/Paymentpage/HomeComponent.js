@@ -95,7 +95,7 @@ class Home extends Component {
     // let trxid = Date.now()
     let dataGenerateTrx = generatePayloadTransaction({
       pinhmac: generateSha256(pin),
-      channelId: 'Majesty0001',
+      channelId: 'prismaschid',
       serviceCode: '2002',
       currency: 'IDR',
       transactionNo: '01082017',
@@ -105,9 +105,9 @@ class Home extends Component {
       customerName: 'Nofrets Poai',
       customerEmail: 'opetstudio@gmail.com',
       customerPhone: '085342805673',
-      key: '5CBE964F5BA21',
-      callbackURL: 'https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en',
-      merchantName: 'smk',
+      key: '5CBE964F5BA21XXXX',
+      callbackURL: 'https://localhost/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en',
+      merchantName: 'Prisma SCHID',
       productCode: '125',
       period: 'August 2019',
       lang: 'en'
@@ -157,11 +157,11 @@ class Home extends Component {
     // })
     return (
       <div>
-       // {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
+        {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
         <Container>
-        <div style={{backgroundColor:Colors.rp_gray2}}>
-          <p style={{textAlign:'center',fontSize: '100%', fontSize: '3.5vw',color:Colors.white}}>Transaction detail</p>
-        </div>
+          <div style={{backgroundColor: Colors.rp_gray2}}>
+            <p style={{textAlign: 'center', fontSize: '100%', fontSize: '3.5vw', color: Colors.white}}>Transaction detail</p>
+          </div>
           <Segment id={'segment1'}>
             <Image src={prayapay} style={{height: 45, display: 'inline'}} />
             {/* <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} /> */}
@@ -272,6 +272,10 @@ class Home extends Component {
           </Segment>
         </Container>
         {/* </Segment> */}
+        <br />
+        <br />
+        <br />
+        <br />
         {this.props.footer}
       </div>
     )
