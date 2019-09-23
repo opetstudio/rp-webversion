@@ -43,7 +43,7 @@ class LoginPageComponent extends Component {
                 <p style={{color:Colors.white}}>Log-in to your account</p>
               </Grid.Column>
             </Header>
-            <Form size='large' onSubmit={(e, o) => this._formOnSubmit(e, o)}>
+            <Form loading={this.props.isRequesting} size='large' onSubmit={(e, o) => this._formOnSubmit(e, o)}>
               <Segment stacked>
                 {this.props.responseCode !== '' && this.props.responseCode === 'MBDD00' && messageBox(this.props.responseDescription, true)}
                 {this.props.responseCode !== '' && this.props.responseCode !== 'MBDD00' && messageBox(this.props.responseDescription, false)}
