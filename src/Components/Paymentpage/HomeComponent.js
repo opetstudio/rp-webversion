@@ -17,7 +17,7 @@ import {
 } from 'semantic-ui-react'
 import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
-import {Images} from '../../Themes'
+import {Images,Colors} from '../../Themes'
 import {Helmet} from 'react-helmet'
 import {generateSha256, generatePayloadTransaction} from '../../Utils/Utils'
 // import FormCc from './FormCc'
@@ -28,7 +28,7 @@ const jcbicon = Images.jcbicon
 const mastercardicon = Images.mastercardicon
 const pcidss = Images.pcidss
 const sslsecurity = Images.sslsecurity
-const plinkpayment = Images.plinkpayment
+const prayapay = Images.rayapay_logo
 
 // let minOffset = 0
 let maxOffset = 20
@@ -157,11 +157,14 @@ class Home extends Component {
     // })
     return (
       <div>
-        {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
+       // {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
         <Container>
+        <div style={{backgroundColor:Colors.rp_gray2}}>
+          <p style={{textAlign:'center',fontSize: '100%', fontSize: '3.5vw',color:Colors.white}}>Transaction detail</p>
+        </div>
           <Segment id={'segment1'}>
-            <Image src={plinkpayment} style={{height: 45, display: 'inline'}} />
-            <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} />
+            <Image src={prayapay} style={{height: 45, display: 'inline'}} />
+            {/* <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} /> */}
             <Image src={sslsecurity} style={{height: 20, marginLeft: 20, display: 'inline'}} />
           </Segment>
           {/* <Segment style={{ marginTop: 10, marginBottom: 10 }} placeholder>
@@ -255,14 +258,14 @@ class Home extends Component {
                   </Table.Body>
                 </Table> */}
                 </Grid.Column>
-                <Grid.Column id={'inputkartupanel'}>
+                <Grid.Column id={'inputkartupanel'} >
                   {/* <Header as='h3'>
                   <span>Pay with Credit Card</span>
                 </Header> */}
                   {(this.props.message !== '00' && this.props.message !== '') &&
                     <Message error content={this.props.message} />
                   }
-                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit} />
+                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

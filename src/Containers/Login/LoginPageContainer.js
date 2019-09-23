@@ -4,12 +4,13 @@ import LoginActions, { LoginSelectors } from './redux'
 import {isLoggedIn} from '../../Utils/Utils'
 import LoginPageComponent from '../../Components/Login/LoginPageComponent'
 import { injectIntl } from 'react-intl'
+import Footer2 from '../../Containers/Paymentpage/Footer/footer2'
 import AppConfig from '../../Config/AppConfig'
 const basePath = AppConfig.basePath
 
 class TheComponent extends React.PureComponent {
   render () {
-    if (isLoggedIn(this.props.isLoggedIn) !== true) return (<LoginPageComponent {...this.props} />)
+    if (isLoggedIn(this.props.isLoggedIn) !== true) return (<LoginPageComponent {...this.props} footer={(<Footer2 />)} />)
     // if (isLoggedIn(this.props.isLoggedIn) !== true) return null
     // else return null
     else return window.open(`${basePath}/qrscanner`, '_self', true)
