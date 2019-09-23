@@ -13,6 +13,11 @@ const Colors = {
   darkBlue: '#2877D7',
   darkOrange: '#F5A623',
   primary: '#4A8FE2',
-  secondary: '#FFB644'
+  secondary: '#FFB644',
+  rp_red: '#cc2228',
+  rp_gray1: '#a8a8a8',
+  rp_gray2: '#414141',
+  rp_gray3: '#333131',
+  rp_yellow: '#d0df54'
 }
 export default Colors
