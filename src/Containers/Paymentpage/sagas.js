@@ -68,7 +68,7 @@ export function * paymentpageRequest (api, action) {
     // "message": "SUCCESS"
       yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message}))
     }
-    if (data.url === '/generate-transaction') {
+    if (data.url === '/transaction-api/generate-transaction') {
     //   "insertStatus": "00",
     // "message": "SUCCESS"
       let dataqrjsonstring = path(['dataqrjsonstring'], response.data)
@@ -76,7 +76,7 @@ export function * paymentpageRequest (api, action) {
       if (urlVerifyTransaction !== null && urlVerifyTransaction !== '') window.open(urlVerifyTransaction, '_self')
       yield put(PaymentpageActions.paymentpageRequestPatch({paymentStatus: response.data.insertStatus, paymentStatusMessage: response.data.message, dataqrjsonstring, urlVerifyTransaction}))
     }
-    if (data.url === '/do-payment') {
+    if (data.url === '/transaction-api/do-payment') {
     //   "insertStatus": "00",
     // "message": "SUCCESS"
       let urlStatusTransaction = path(['urlStatusTransaction'], response.data) || ''

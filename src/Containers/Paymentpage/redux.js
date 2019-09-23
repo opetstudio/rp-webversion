@@ -37,7 +37,7 @@ let initialData = AppConfig.env === 'development' ? {
   MERCHANT_NAME: 'The Majesty',
   PRODUCT_CODE: '20130',
   PERIOD: 'July 2019'
-} : window
+} : JSON.parse(window.SERVER_DATA || '{}')
 
 export const INITIAL_STATE = Immutable({
   isRequesting: false,

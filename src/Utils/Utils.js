@@ -124,3 +124,45 @@ export const isLoggedIn = (isLoggedInState) => {
 export const generateHmac = (msg) => {
   return hmacSha256(msg, 'prismalink2019').toString()
 }
+export const generateSha256 = (msg) => {
+  return sha256(msg).toString()
+}
+export const generatePayloadTransaction = ({
+  pinhmac,
+  channelId,
+  serviceCode,
+  currency,
+  transactionNo,
+  transactionAmount,
+  transactionDate,
+  description,
+  customerName,
+  customerEmail,
+  customerPhone,
+  key,
+  callbackURL,
+  merchantName,
+  productCode,
+  period,
+  lang
+}) => {
+  return {
+    pinhmac: pinhmac,
+    channelId: 'Majesty0001',
+    serviceCode: '2002',
+    currency: 'IDR',
+    transactionNo: '01082017',
+    transactionAmount: '1000',
+    transactionDate: '09-08-2019 11:20:30',
+    description: 'bayar uang SPP',
+    customerName: 'Nofrets Poai',
+    customerEmail: 'opetstudio@gmail.com',
+    customerPhone: '085342805673',
+    key: '5CBE964F5BA21',
+    callbackURL: 'https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en',
+    merchantName: 'smk',
+    productCode: '125',
+    period: 'August 2019',
+    lang: 'en'
+  }
+}

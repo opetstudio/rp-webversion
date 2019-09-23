@@ -19,6 +19,7 @@ import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
 import {Images} from '../../Themes'
 import {Helmet} from 'react-helmet'
+import {generateSha256, generatePayloadTransaction} from '../../Utils/Utils'
 // import FormCc from './FormCc'
 import QrcodeInputPinForm from './QrcodeInputPinForm'
 
@@ -85,36 +86,56 @@ class Home extends Component {
     this.props.paymentpageRequestPatch({[v.name]: v.value})
     // this.setState({firstName: v.value})
   }
-  handleSubmit () {
-    let cardType = ''
-    let cardNo = this.props.cardNumber
-    if (cardNo.startsWith('3')) cardType = 'JCB'
-    else if (cardNo.startsWith('4')) cardType = 'VISA'
-    else if (cardNo.startsWith('5')) cardType = 'MASTERCARD'
-    let trxid = Date.now()
-    // let callbackUrl = this.props.callbackUrl || 'http://localhost:8080/PaymentPage/creditcard/callback?trxid=' + trxid
-    let payload = {
-      'trxid': trxid,
-      'channelId': this.props.par1,
-      'serviceCode': this.props.par2,
-      'currency': this.props.par3,
-      'transactionNo': this.props.par4 !== '___PAR4__' ? this.props.par4 : '',
-      'transactionAmount': this.props.par5,
-      'transactionDate': this.props.par6,
-      'callbackURL': this.props.par12,
-      'description': this.props.par7,
-      'customerName': this.props.par8,
-      'customerEmail': this.props.par9,
-      'customerPhone': this.props.par10,
-      'cardNo': this.props.cardNumber,
-      'cardExpiryYear': this.props.expireYear,
-      'cardExpiryMonth': this.props.expireMonth,
-      'cardSecurityCode': this.props.cvv,
-      'cardType': cardType,
-      'secretKey': this.props.par11
-    }
+  handleSubmit (pin) {
+    // let cardType = ''
+    // let cardNo = this.props.cardNumber
+    // if (cardNo.startsWith('3')) cardType = 'JCB'
+    // else if (cardNo.startsWith('4')) cardType = 'VISA'
+    // else if (cardNo.startsWith('5')) cardType = 'MASTERCARD'
+    // let trxid = Date.now()
+    let dataGenerateTrx = generatePayloadTransaction({
+      pinhmac: generateSha256(pin),
+      channelId: 'Majesty0001',
+      serviceCode: '2002',
+      currency: 'IDR',
+      transactionNo: '01082017',
+      transactionAmount: '1000',
+      transactionDate: '09-08-2019 11:20:30',
+      description: 'bayar uang SPP',
+      customerName: 'Nofrets Poai',
+      customerEmail: 'opetstudio@gmail.com',
+      customerPhone: '085342805673',
+      key: '5CBE964F5BA21',
+      callbackURL: 'https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en',
+      merchantName: 'smk',
+      productCode: '125',
+      period: 'August 2019',
+      lang: 'en'
+    })
+    // let payload = {
+    //   'trxid': trxid,
+    //   'channelId': this.props.par1,
+    //   'serviceCode': this.props.par2,
+    //   'currency': this.props.par3,
+    //   'transactionNo': this.props.par4 !== '___PAR4__' ? this.props.par4 : '',
+    //   'transactionAmount': this.props.par5,
+    //   'transactionDate': this.props.par6,
+    //   'callbackURL': this.props.par12,
+    //   'description': this.props.par7,
+    //   'customerName': this.props.par8,
+    //   'customerEmail': this.props.par9,
+    //   'customerPhone': this.props.par10,
 
-    this.props.paymentpageRequest({message: 'requesting...', payload, url: '/do-payment', method: 'post'})
+    //   'cardNo': this.props.cardNumber,
+    //   'cardExpiryYear': this.props.expireYear,
+    //   'cardExpiryMonth': this.props.expireMonth,
+    //   'cardSecurityCode': this.props.cvv,
+
+    //   'cardType': cardType,
+    //   'secretKey': this.props.par11
+    // }
+
+    this.props.paymentpageRequest({message: 'requesting...', payload: dataGenerateTrx, url: '/transaction-api/do-payment', method: 'post'})
   }
   _currencyDisplay (currency) {
     let cur = {

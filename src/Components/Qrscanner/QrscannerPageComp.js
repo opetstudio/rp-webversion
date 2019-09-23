@@ -17,6 +17,7 @@ import {
   Card,
   Dropdown
 } from 'semantic-ui-react'
+import {generateSha256, generatePayloadTransaction} from '../../Utils/Utils'
 import { FormattedMessage } from 'react-intl'
 import QrReader from 'react-qr-scanner'
 import { Redirect } from 'react-router-dom'
@@ -47,9 +48,27 @@ export default class QrscannerPageComp extends Component {
       if (this.props.isRequesting) return
 
       this.props.paymentpageRequestPatch({dataqr: data})
-      let dataGenerateTrx = JSON.parse('{"channelId": "Majesty0001", "serviceCode": "2002","currency": "IDR", "transactionNo": "01082017", "transactionAmount": "1000", "transactionDate":"09-08-2019 11:20:30", "description": "pembayaran hunian, no unit 125", "customerName": "risa paramita", "customerEmail": "endah.paramita@prismalink.co.id", "customerPhone": "08976357111", "key": "5CBE964F5BA21", "callbackURL": "https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en", "merchantName": "Majesty Apartment", "productCode": "125", "period": "August 2019", "lang": "en"}')
+      let dataGenerateTrx = generatePayloadTransaction({
+        pinhmac: '',
+        channelId: 'Majesty0001',
+        serviceCode: '2002',
+        currency: 'IDR',
+        transactionNo: '01082017',
+        transactionAmount: '1000',
+        transactionDate: '09-08-2019 11:20:30',
+        description: 'bayar uang SPP',
+        customerName: 'Nofrets Poai',
+        customerEmail: 'opetstudio@gmail.com',
+        customerPhone: '085342805673',
+        key: '5CBE964F5BA21',
+        callbackURL: 'https://secure.plink.co.id/event-listener/landingpage?noInv=01082017&tgl=09-08-2019%2011%3A20%3A30&nama=risa%20paramita&noUnit=125&hunian=The%20Majesty&periode=August%202019&total=1000&lang=en',
+        merchantName: 'smk',
+        productCode: '125',
+        period: 'August 2019',
+        lang: 'en'
+      })
       dataGenerateTrx = merge(dataGenerateTrx, {sof: this.props.sof, dataqr: this.props.dataqr})
-      this.props.paymentpageRequest({message: 'requesting', payload: dataGenerateTrx, url: '/generate-transaction', method: 'post'})
+      this.props.paymentpageRequest({message: 'requesting', payload: dataGenerateTrx, url: '/transaction-api/generate-transaction', method: 'post'})
     }
   }
   handleError = err => {
