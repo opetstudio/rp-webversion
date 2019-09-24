@@ -105,47 +105,43 @@ export default class QrscannerPageComp extends Component {
   }
   _scannerRender () {
     return (
-      <div>
-        <Segment>
-          <Grid celled='internally' columns='equal' stackable>
-            <Grid.Row>
-              <Grid.Column>
-                <Form loading={this.props.isRequesting}>
-                  <Form.Field>
-                    <label>Sumber Dana</label>
-                    <Dropdown
-                      icon={'get pocket'}
-                      labeled
-                      className='icon'
-                      button
-                      options={optionsSof}
-                      defaultValue={optionsSof[0].value}
-                      onChange={(o, v) => this.handleChange({}, {type: 'dropdown', name: 'sof', value: v.value})}
-                      style={{width: '100%'}}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input label='INV' placeholder='Invoice Number' onChange={this.handleChange} name='invoice' defaultValue={this.props.par4} />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input label='IDR' placeholder='Total Amount' onChange={this.handleChange} name='amount' defaultValue={this.props.par5} />
-                  </Form.Field>
-                  <Grid.Row style={{backgroundColor: Colors.rp_gray2}}>
-                    <QrReader
-                      delay={300}
-                      onError={this.handleError}
-                      onScan={this.handleScan}
-                      style={{width: '100%', align: 'middle', padding: '0'}}
-                      // facingMode={'rear'}
-                    />
-                    <p style={{textAlign: 'center', color: Colors.white, padding: '10px', fontSize: '100%'}}>Pastikan Qr tidak rusak</p>
-                  </Grid.Row>
-                </Form>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
-      </div>
+      <Grid celled='internally' columns='equal' stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <Form loading={this.props.isRequesting}>
+              <Form.Field>
+                <label>Sumber Dana</label>
+                <Dropdown
+                  icon={'get pocket'}
+                  labeled
+                  className='icon'
+                  button
+                  options={optionsSof}
+                  defaultValue={optionsSof[0].value}
+                  onChange={(o, v) => this.handleChange({}, {type: 'dropdown', name: 'sof', value: v.value})}
+                  style={{width: '100%'}}
+                />
+              </Form.Field>
+              <Form.Field>
+                <Input label='INV' placeholder='Invoice Number' onChange={this.handleChange} name='invoice' defaultValue={this.props.par4} />
+              </Form.Field>
+              <Form.Field>
+                <Input label='IDR' placeholder='Total Amount' onChange={this.handleChange} name='amount' defaultValue={this.props.par5} />
+              </Form.Field>
+              <Grid.Row style={{backgroundColor: Colors.rp_gray2}}>
+                <QrReader
+                  delay={300}
+                  onError={this.handleError}
+                  onScan={this.handleScan}
+                  style={{width: '100%', align: 'middle', padding: '0'}}
+                  // facingMode={'rear'}
+                />
+                <p style={{textAlign: 'center', color: Colors.white, padding: '10px', fontSize: '100%'}}>Pastikan Qr tidak rusak</p>
+              </Grid.Row>
+            </Form>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
   render () {
@@ -154,7 +150,7 @@ export default class QrscannerPageComp extends Component {
     return (
       // <div style={{backgroundImage: 'url(' + Images.base_bg + ')', backgroundSize: '100% 100%', padding: '5%'}}>
       <div>
-        <Container>
+        <Container style={{minHeight: 500}}>
           <p style={{textAlign: 'center', color: Colors.white, fontStyle: 'bold', fontSize: '100%', fontSize: '3.5vw'}}>Scan QrCode anda disini</p>
           <Menu pointing>
             <Menu.Item
@@ -169,8 +165,14 @@ export default class QrscannerPageComp extends Component {
               onClick={() => this.props.logout()}
             />
           </Menu>
-          {this._scannerRender()}
+          <Segment>
+            {this._scannerRender()}
+          </Segment>
         </Container>
+        <br />
+        <br />
+        <br />
+        <br />
         {this.props.footer}
       </div>
     )

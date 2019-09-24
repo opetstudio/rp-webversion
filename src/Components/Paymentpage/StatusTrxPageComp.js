@@ -174,20 +174,20 @@ class StatusTrxPageComp extends Component {
                       <List.Header>{(<FormattedMessage id='label.no_tagihan' />)}</List.Header>
                       <List.Content>{this.props.par4}</List.Content>
                     </List.Item>
-                    <List.Item>
+                    {/* <List.Item>
                       <List.Header>{(<FormattedMessage id='label.no_unit' />)}</List.Header>
                       <List.Content>{this.props.productCode}</List.Content>
-                    </List.Item>
+                    </List.Item> */}
                     <List.Item>
                       <List.Header>{(<FormattedMessage id='label.nama_merchant' />)}</List.Header>
                       <List.Content>{this.props.merchantName}</List.Content>
                     </List.Item>
-                    <List.Item>
+                    {/* <List.Item>
                       <List.Header>{(<FormattedMessage id='label.periode' />)}</List.Header>
                       <List.Content>
                         {this.props.period}
                       </List.Content>
-                    </List.Item>
+                    </List.Item> */}
                     <List.Item>
                       <List.Header>{(<FormattedMessage id='label.tanggal_transaksi' />)}</List.Header>
                       <List.Content>

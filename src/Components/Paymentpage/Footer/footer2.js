@@ -40,7 +40,8 @@ class Footer2Layout extends Component {
   }
   render () {
     return (
-      <div style={{width: '100%', position: 'absolute', bottom: 0}}>
+      <div style={{width: '100%', bottom: 0}}>
+        {/* <div style={{width: '100%', position: 'absolute', bottom: 0}}> */}
         <Segment vertical style={{ padding: '0em 0em' }}>
           <Container>
             <Grid divided stackable>
