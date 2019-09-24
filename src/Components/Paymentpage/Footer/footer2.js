@@ -56,8 +56,7 @@ class Footer2Layout extends Component {
               </Grid.Row> */}
               <Grid.Row>
                 <Grid.Column textAlign='center'>
-                  <span id='footertitle' >PT. Prismalink International</span>
-                  {/* <p>Copyright © 2019 PT. Prismalink</p> */}
+                  <p>Copyright © 2019 PT. Erevna Raya Teknologi</p>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

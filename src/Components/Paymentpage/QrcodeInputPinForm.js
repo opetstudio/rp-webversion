@@ -47,7 +47,7 @@ export default class QrcodeInputPinForm extends Component {
           <Form.Input type='password' name='pin' placeholder={this.props.intl.formatMessage({ id: 'label.pin' })} onChange={this.handleChange} />
         </Form.Field>
         <br />
-        <Button primary onClick={this.props.handleSubmit} disabled={(this.props.isRequesting)}>Bayar</Button>
+        <Button color='red' onClick={this.props.handleSubmit} disabled={(this.props.isRequesting)}>Bayar</Button>
       </Form>
     )
   }

@@ -90,7 +90,7 @@ class QrcodePageComponent extends Component {
                         <Input type='text' name='userid' fluid placeholder={this.props.intl.formatMessage({ id: 'label.userid' })} icon={<Icon name='lock' />} onChange={this.handleChange} />
                       </Form.Field>
                     </Form.Group>
-                    <Button primary onClick={this.handleSubmit} disabled={(this.props.isRequesting)}>{(<FormattedMessage id='label.generate' />)}</Button>
+                    <Button color='red' onClick={this.handleSubmit} disabled={(this.props.isRequesting)}>{(<FormattedMessage id='label.generate' />)}</Button>
                     <p>
                     Halaman ini adalah tools untuk membuat gambar QRCode sesuai standard aplikasi RayaPay (Rp). Cara menggunakan:
                     </p>

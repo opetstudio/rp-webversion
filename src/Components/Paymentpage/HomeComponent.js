@@ -27,7 +27,7 @@ const jcbicon = Images.jcbicon
 const mastercardicon = Images.mastercardicon
 const pcidss = Images.pcidss
 const sslsecurity = Images.sslsecurity
-const plinkpayment = Images.plinkpayment
+const iconrayapay = Images.iconrayapay
 
 // let minOffset = 0
 let maxOffset = 20
@@ -139,8 +139,7 @@ class Home extends Component {
         {/* <Segment style={{ padding: '0em', borderBottom: 0 }} vertical> */}
         <Container>
           <Segment id={'segment1'}>
-            <Image src={plinkpayment} style={{height: 45, display: 'inline'}} />
-            <Image src={pcidss} style={{height: 20, marginLeft: 20, display: 'inline'}} />
+            <Image src={iconrayapay} style={{height: 45, display: 'inline'}} />
             <Image src={sslsecurity} style={{height: 20, marginLeft: 20, display: 'inline'}} />
           </Segment>
           {/* <Segment style={{ marginTop: 10, marginBottom: 10 }} placeholder>

@@ -6,6 +6,10 @@ const images = {
   mastercardicon: require('../Images/mastercard-icon.png'),
   pcidss: require('../Images/pcidss.png'),
   sslsecurity: require('../Images/sslsecurity.png'),
-  plinkpayment: require('../Images/plinkpayment.png')
+  plinkpayment: require('../Images/plinkpayment.png'),
+  logorayapay2: require('../Images/logorayapay2.png'),
+  logorayapay1: require('../Images/logorayapay1.png'),
+  logorayapay: require('../Images/logorayapay.png'),
+  iconrayapay: require('../Images/iconrayapay.png')
 }
 export default images

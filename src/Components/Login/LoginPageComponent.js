@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import {Images} from '../../Themes'
 
+const logorayapay2 = Images.logorayapay2
+
 const messageBox = (msg, success) => (
   <Message success={success} negative={!success}>
     <p>{msg}</p>
@@ -33,8 +35,8 @@ class LoginPageComponent extends Component {
   render () {
     return (<Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' color='teal' textAlign='center'>
-          <Image src='/logo.png' /> Log-in to your account
+        <Header as='h2' color='black' textAlign='center'>
+          <Image src={logorayapay2} /> Log-in to your account
         </Header>
         <Form size='large' onSubmit={(e, o) => this._formOnSubmit(e, o)}>
           <Segment stacked>
@@ -51,7 +53,7 @@ class LoginPageComponent extends Component {
               type='password'
             />
 
-            <Button type='submit' color='teal' fluid size='large'>
+            <Button type='submit' color='black' fluid size='large'>
             Login
             </Button>
           </Segment>

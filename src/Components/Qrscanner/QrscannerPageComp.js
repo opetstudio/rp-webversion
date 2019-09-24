@@ -22,7 +22,13 @@ import QrReader from 'react-qr-reader'
 import { Redirect } from 'react-router-dom'
 import { merge } from 'ramda'
 import AppConfig from '../../Config/AppConfig'
+import {Images} from '../../Themes'
+
 const basePath = AppConfig.basePath
+const visaIcon = Images.visaicon
+const jcbicon = Images.jcbicon
+const mastercardicon = Images.mastercardicon
+const iconrayapay = Images.iconrayapay
 
 const optionsSof = [
   {key: '01', text: 'RayaPay', value: '01'},
@@ -83,6 +89,14 @@ export default class QrscannerPageComp extends Component {
                   {/* <label style={{visibility: 'hidden'}}>.</label> */}
                   {/* <Input fluid placeholder='Middle name' /> */}
                   <label>Sumber Dana</label>
+                  <label style={{position: 'relative'}}>
+                    <div style={{position: 'absolute', right: 0, bottom: 0}}>
+                      <Image src={iconrayapay} style={{width: 55, marginLeft: 10, display: 'inline'}} />
+                      <Image src={mastercardicon} style={{width: 35, marginLeft: 10, display: 'inline'}} />
+                      <Image src={visaIcon} style={{width: 30, marginLeft: 10, display: 'inline'}} />
+                      <Image src={jcbicon} style={{width: 25, marginLeft: 10, display: 'inline'}} />
+                    </div>
+                  </label>
                   {/* <Select name='sof' fluid placeholder='sof' options={optionsSof} onChange={this.handleChange} /> */}
                   <Dropdown
                     options={optionsSof}
