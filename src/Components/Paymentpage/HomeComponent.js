@@ -28,7 +28,7 @@ const jcbicon = Images.jcbicon
 const mastercardicon = Images.mastercardicon
 const pcidss = Images.pcidss
 const sslsecurity = Images.sslsecurity
-const prayapay = Images.rayapay_logo
+const prayapay = Images.rayapay_logo_merah
 
 // let minOffset = 0
 let maxOffset = 20
@@ -59,9 +59,7 @@ class Home extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeItemBottomMenu: '1',
-      pin: '',
-      amount: 0
+      activeItemBottomMenu: '1'
     //   firstName: ''
     }
     this.handleChange = this.handleChange.bind(this)
@@ -74,23 +72,21 @@ class Home extends Component {
   //   componentDidMount () {
   //   }
   handleChange (o, v) {
-    if (v.name === 'pin') return this.setState({pin: v.value})
-    if (v.name === 'amount') return this.props.paymentpageRequestPatch({'par5': v.value})
-    // if (v.type === 'checkbox') {
-    //   return this.props.paymentpageRequestPatch({[v.name]: v.checked})
-    // }
-    // if (v.name === 'cardNumber') {
-    //   //  trim
-    //   let cardNo = v.value
-    //   if (cardNo.length === 16) {
-    //     // hit luhn
-    //     this.props.paymentpageRequest({message: 'requesting', payload: {cardNo}, url: '/card-checking/luhn-validate', method: 'post'})
-    //   }
-    // }
-    // this.props.paymentpageRequestPatch({[v.name]: v.value})
+    if (v.type === 'checkbox') {
+      return this.props.paymentpageRequestPatch({[v.name]: v.checked})
+    }
+    if (v.name === 'cardNumber') {
+      //  trim
+      let cardNo = v.value
+      if (cardNo.length === 16) {
+        // hit luhn
+        this.props.paymentpageRequest({message: 'requesting', payload: {cardNo}, url: '/card-checking/luhn-validate', method: 'post'})
+      }
+    }
+    this.props.paymentpageRequestPatch({[v.name]: v.value})
     // this.setState({firstName: v.value})
   }
-  handleSubmit () {
+  handleSubmit (pin) {
     // let cardType = ''
     // let cardNo = this.props.cardNumber
     // if (cardNo.startsWith('3')) cardType = 'JCB'
@@ -98,7 +94,7 @@ class Home extends Component {
     // else if (cardNo.startsWith('5')) cardType = 'MASTERCARD'
     // let trxid = Date.now()
     let dataGenerateTrx = generatePayloadTransaction({
-      pinhmac: generateSha256(this.state.pin),
+      pinhmac: generateSha256(pin),
       channelId: 'prismaschid',
       serviceCode: '2002',
       currency: 'IDR',
@@ -194,24 +190,22 @@ class Home extends Component {
                     </List.Item>
                     <List.Item>
                       <List.Header>{(<FormattedMessage id='label.no_tagihan' />)}</List.Header>
-                      <List.Content>
-                        {this.props.par4}
-                      </List.Content>
+                      <List.Content>{this.props.par4}</List.Content>
                     </List.Item>
-                    {/* <List.Item>
+                    <List.Item>
                       <List.Header>{(<FormattedMessage id='label.no_unit' />)}</List.Header>
                       <List.Content>{this.props.productCode}</List.Content>
-                    </List.Item> */}
+                    </List.Item>
                     <List.Item>
                       <List.Header>{(<FormattedMessage id='label.nama_merchant' />)}</List.Header>
                       <List.Content>{this.props.merchantName}</List.Content>
                     </List.Item>
-                    {/* <List.Item>
+                    <List.Item>
                       <List.Header>{(<FormattedMessage id='label.periode' />)}</List.Header>
                       <List.Content>
                         {this.props.period}
                       </List.Content>
-                    </List.Item> */}
+                    </List.Item>
                     <List.Item>
                       <List.Header>{(<FormattedMessage id='label.tanggal_transaksi' />)}</List.Header>
                       <List.Content>
@@ -271,7 +265,7 @@ class Home extends Component {
                   {(this.props.message !== '00' && this.props.message !== '') &&
                     <Message error content={this.props.message} />
                   }
-                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+                  <QrcodeInputPinForm {...this.props} handleSubmit={this.handleSubmit}/>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

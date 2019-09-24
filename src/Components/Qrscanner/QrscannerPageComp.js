@@ -7,13 +7,14 @@ import {
   Input,
   Button,
   Container,
-  Icon,
   Form,
   Menu,
   Message,
+  Icon,
   Select,
   Table,
   List,
+  Popup,
   Card,
   Label,
   Dropdown
@@ -105,43 +106,74 @@ export default class QrscannerPageComp extends Component {
   }
   _scannerRender () {
     return (
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row>
-          <Grid.Column>
-            <Form loading={this.props.isRequesting}>
-              <Form.Field>
-                <label>Sumber Dana</label>
-                <Dropdown
-                  icon={'get pocket'}
-                  labeled
-                  className='icon'
-                  button
-                  options={optionsSof}
-                  defaultValue={optionsSof[0].value}
-                  onChange={(o, v) => this.handleChange({}, {type: 'dropdown', name: 'sof', value: v.value})}
-                  style={{width: '100%'}}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Input label='INV' placeholder='Invoice Number' onChange={this.handleChange} name='invoice' defaultValue={this.props.par4} />
-              </Form.Field>
-              <Form.Field>
-                <Input label='IDR' placeholder='Total Amount' onChange={this.handleChange} name='amount' defaultValue={this.props.par5} />
-              </Form.Field>
-              <Grid.Row style={{backgroundColor: Colors.rp_gray2}}>
-                <QrReader
-                  delay={300}
-                  onError={this.handleError}
-                  onScan={this.handleScan}
-                  style={{width: '100%', align: 'middle', padding: '0'}}
-                  // facingMode={'rear'}
-                />
-                <p style={{textAlign: 'center', color: Colors.white, padding: '10px', fontSize: '100%'}}>Pastikan Qr tidak rusak</p>
-              </Grid.Row>
-            </Form>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div>
+        <Segment>
+          <Grid celled='internally' columns='equal' stackable>
+            <Grid.Row>
+              <Grid.Column>
+                <Form loading={this.props.isRequesting}>
+                  <Form.Field>
+                    <label>Sumber Dana</label>
+                    <Dropdown
+                      icon={'get pocket'}
+                      labeled
+                      className='icon'
+                      button
+                      options={optionsSof}
+                      defaultValue={optionsSof[0].value}
+                      onChange={(o, v) => this.handleChange({}, {type: 'dropdown', name: 'sof', value: v.value})}
+                      style={{width: '90%'}}
+                    />
+                    <Popup
+                      trigger={
+                        <Icon name='help' />
+                      }
+                      header='Sumber dana anda'
+                      content='jika anda sudah melakukan topup ke rayapay anda bisa gunakan opsi rayapay, namun jika anda sudah mendaftarkan akun bank anda gunakan akun bank anda'
+                      on='hover'
+                      hideOnScroll
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Input style={{width: '90%'}} label='INV' placeholder='Invoice Number' onChange={this.handleChange} name='invoice' defaultValue={this.props.par4} />
+                    <Popup
+                      trigger={
+                        <Icon name='help' />
+                      }
+                      header='Bill Id (Opsional)'
+                      content='adalah id untuk rekap keuangan merchant yg biasany berada pada aplikasi POS merchant'
+                      on='hover'
+                      hideOnScroll
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Input style={{width: '90%'}} label='IDR' placeholder='Total Amount' onChange={this.handleChange} name='amount' defaultValue={this.props.par5} />
+                    <Popup
+                      trigger={
+                        <Icon name='help' />
+                      }
+                      header='Amount (Harus di isi)'
+                      content='adalah  jumlah yang harus dibayar oleh customer'
+                      on='hover'
+                      hideOnScroll
+                    />
+                  </Form.Field>
+                  <Grid.Row style={{backgroundColor: Colors.rp_gray2}}>
+                    <QrReader
+                      delay={300}
+                      onError={this.handleError}
+                      onScan={this.handleScan}
+                      style={{width: '100%', align: 'middle', padding: '0'}}
+                      // facingMode={'rear'}
+                    />
+                    <p style={{textAlign: 'center', color: Colors.white, padding: '10px', fontSize: '100%'}}>Pastikan Qr tidak rusak</p>
+                  </Grid.Row>
+                </Form>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+      </div>
     )
   }
   render () {
@@ -150,7 +182,7 @@ export default class QrscannerPageComp extends Component {
     return (
       // <div style={{backgroundImage: 'url(' + Images.base_bg + ')', backgroundSize: '100% 100%', padding: '5%'}}>
       <div>
-        <Container style={{minHeight: 500}}>
+        <Container>
           <p style={{textAlign: 'center', color: Colors.white, fontStyle: 'bold', fontSize: '100%', fontSize: '3.5vw'}}>Scan QrCode anda disini</p>
           <Menu pointing>
             <Menu.Item
@@ -165,14 +197,8 @@ export default class QrscannerPageComp extends Component {
               onClick={() => this.props.logout()}
             />
           </Menu>
-          <Segment>
-            {this._scannerRender()}
-          </Segment>
+          {this._scannerRender()}
         </Container>
-        <br />
-        <br />
-        <br />
-        <br />
         {this.props.footer}
       </div>
     )
