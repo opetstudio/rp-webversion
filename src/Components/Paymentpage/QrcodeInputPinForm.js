@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {Form, Image, Button} from 'semantic-ui-react'
 import { FormattedMessage } from 'react-intl'
-import {Images} from '../../Themes'
+import {Images, Colors} from '../../Themes'
+import AppConfig from '../../Config/AppConfig'
 
 const visaIcon = Images.visaicon
 const jcbicon = Images.jcbicon
@@ -51,6 +52,7 @@ export default class QrcodeInputPinForm extends Component {
         </Form.Field>
         <br />
         <Button primary onClick={() => this.props.handleSubmit(this.state.pin)} disabled={(this.props.isRequesting)}>Bayar</Button>
+        <Button style={{backgroundColor: Colors.rp_gray2}} primary onClick={() => window.open(AppConfig.basePath + '/qrscanner', '_self')}>Batal</Button>
       </Form>
     )
   }

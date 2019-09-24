@@ -25,7 +25,8 @@ const mapStateToProps = (state, ownProps) => {
     formSubmitMessage: LoginSelectors.getFormSubmitMessage(state.login),
     responseMessage: LoginSelectors.responseMessage(state.login),
     responseDescription: LoginSelectors.responseDescription(state.login),
-    responseCode: LoginSelectors.responseCode(state.login)
+    responseCode: LoginSelectors.responseCode(state.login),
+    isRequesting: LoginSelectors.isRequesting(state.login)
   }
 }
 

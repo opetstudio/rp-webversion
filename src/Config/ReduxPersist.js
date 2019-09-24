@@ -5,7 +5,7 @@ import AppConfig from './AppConfig'
 // More info here:  https://shift.infinite.red/shipping-persistant-reducers-7341691232b1
 const REDUX_PERSIST = {
   active: true,
-  reducerVersion: '200',
+  reducerVersion: '201',
   storeConfig: {
     key: 'root',
     storage: storage, // Come back and replace this at some point

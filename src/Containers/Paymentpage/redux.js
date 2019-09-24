@@ -15,7 +15,11 @@ export const PaymentpageTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
-let initialData = AppConfig.env === 'development' ? {
+let serverDataJsonString = '{}'
+if (window.SERVER_DATA !== '' && window.SERVER_DATA !== '__SERVER_DATA__' && window.SERVER_DATA !== '${SERVER_DATA}') {
+  serverDataJsonString = window.SERVER_DATA
+}
+let initialData = AppConfig.env === 'developmentxxx' ? {
   CTRX_ID: '',
   STRX_ID: '',
   CALLBACK_URL: '',
@@ -37,7 +41,7 @@ let initialData = AppConfig.env === 'development' ? {
   MERCHANT_NAME: 'The Majesty',
   PRODUCT_CODE: '20130',
   PERIOD: 'July 2019'
-} : JSON.parse(window.SERVER_DATA || '{}')
+} : JSON.parse(serverDataJsonString || '{}')
 
 export const INITIAL_STATE = Immutable({
   isRequesting: false,
@@ -158,6 +162,8 @@ export const paymentpageRequest = (state, { data }) => {
   if (data.hasOwnProperty('responseStatus')) mergeData.responseStatus = data.responseStatus
   if (data.hasOwnProperty('responseMessage')) mergeData.responseMessage = data.responseMessage
   if (data.hasOwnProperty('responseDescription')) mergeData.responseDescription = data.responseDescription
+  if (data.hasOwnProperty('par4')) mergeData.par4 = data.par4
+  if (data.hasOwnProperty('par5')) mergeData.par5 = data.par5
   mergeData.version = state.version + 1
   return state.merge(mergeData)
 }
