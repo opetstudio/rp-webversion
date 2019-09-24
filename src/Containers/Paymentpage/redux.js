@@ -63,7 +63,7 @@ export const INITIAL_STATE = Immutable({
   par1: initialData.PAR1,
   par2: initialData.PAR2,
   par3: initialData.PAR3,
-  par4: initialData.PAR4, // ___PAR4__
+  par4: initialData.PAR4 || new Date().getTime(), // ___PAR4__
   par5: initialData.PAR5,
   par6: initialData.PAR6,
   par7: initialData.PAR7,
