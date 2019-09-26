@@ -16,7 +16,6 @@ const images = {
   bank_bri: require('../Images/bank_bri.png'),
   bank_mandiri: require('../Images/bank-mandiri.png'),
   rayapay_logo: require('../Images/rayapay.png'),
-  rayapay_logo_putih: require('../Images/rayapay-logo-putih-full.png'),
-  rayapay_logo_merah: require('../Images/rayapay-logo-merah-full.png')
+  rayapay_logo_putih: require('../Images/rayapay-logo-putih-full.png')
 }
 export default images
